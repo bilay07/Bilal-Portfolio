@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Bilal — Full-Stack &amp; AI/ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12151c;
+    --ink-2:#191d27;
+    --paper:#f3ede0;
+    --paper-2:#e9e1cf;
+    --amber:#e8a33d;
+    --teal:#4bb3a3;
+    --cream:#f5f1e6;
+    --slate:#8d94a6;
+    --slate-dim:#5b6172;
+    --line: rgba(245,241,230,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--amber); color:var(--ink); }
+  a{ color:inherit; text-decoration:none; }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .display{ font-family:'Space Grotesk', sans-serif; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  /* ---------- layout shells ---------- */
+  .wrap{ max-width:960px; margin:0 auto; padding:0 28px; }
+  section{ padding:90px 0; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--amber);
+    letter-spacing:0.08em;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--amber); display:inline-block; }
+  h2.display{ font-size:clamp(28px,4vw,40px); font-weight:600; margin-bottom:38px; color:var(--cream); }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter: blur(10px);
+    background:rgba(18,21,28,0.85);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:960px; }
+  .logo{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size:15px; color:var(--cream); }
+  .logo span{ color:var(--amber); }
+  .navlinks{ display:flex; gap:26px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--slate); }
+  .navlinks a:hover{ color:var(--amber); }
+  .navlinks .num{ color:var(--slate-dim); margin-right:4px; }
+
+  /* ---------- hero / terminal ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:80px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(245,241,230,0.045) 1px, transparent 0);
+    background-size: 26px 26px;
+    pointer-events:none;
+  }
+  .terminal{
+    max-width:660px;
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.45);
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:#0f121a;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.r{ background:#e5645a; } .dot.y{ background:#e8b93d; } .dot.g{ background:#4bb35f; }
+  .term-title{ margin-left:8px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate); }
+  .term-body{ padding:24px 22px 30px; font-family:'JetBrains Mono', monospace; font-size:14.5px; color:var(--cream); }
+  .term-body .line{ margin-bottom:10px; opacity:0; animation: reveal 0.4s forwards; }
+  .term-body .prompt{ color:var(--teal); }
+  .term-body .cmd{ color:var(--amber); }
+  .term-body .out{ color:var(--slate); display:block; margin:4px 0 4px 0; }
+  .cursor{ display:inline-block; width:8px; height:16px; background:var(--amber); vertical-align:middle; animation: blink 1s step-end infinite; margin-left:2px; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  @keyframes reveal{ to{ opacity:1; } }
+  .l1{ animation-delay:0.1s;} .l2{ animation-delay:0.5s;} .l3{ animation-delay:1.5s;} .l4{ animation-delay:2.0s;} .l5{ animation-delay:2.5s;} .l6{ animation-delay:3.3s;}
+
+  .hero-tag{
+    max-width:660px; margin-top:26px;
+    font-size:15px; color:var(--slate);
+  }
+  .hero-tag b{ color:var(--cream); font-weight:500; }
+
+  .hero-meta{
+    display:flex; gap:24px; margin-top:34px; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--slate);
+  }
+  .hero-meta a:hover{ color:var(--amber); }
+  .hero-meta .sep{ color:var(--slate-dim); }
+
+  /* ---------- about ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:50px; }
+  .about-grid p{ color:var(--slate); font-size:15.5px; margin-bottom:16px; }
+  .about-grid p b{ color:var(--cream); font-weight:500; }
+  .stat-card{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin-bottom:14px;
+  }
+  .stat-card .num{ font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:var(--amber); }
+  .stat-card .lbl{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate); margin-top:4px; letter-spacing:0.03em; }
+
+  /* ---------- skills as imports ---------- */
+  .import-block{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:10px;
+    padding:26px 28px; font-family:'JetBrains Mono', monospace; font-size:14px; line-height:2;
+    overflow-x:auto;
+  }
+  .kw{ color:#c084fc; } .brace{ color:var(--slate-dim); } .mod{ color:var(--teal); } .str{ color:var(--amber); }
+  .import-block .comment{ color:var(--slate-dim); }
+
+  /* ---------- experience: git log ---------- */
+  .commit{
+    display:grid; grid-template-columns: 90px 1fr; gap:20px;
+    padding:22px 0; border-top:1px solid var(--line);
+    position:relative;
+  }
+  .commit:first-of-type{ border-top:none; }
+  .commit-hash{
+    font-family:'JetBrains Mono', monospace; color:var(--amber); font-size:13px;
+    padding-top:2px;
+  }
+  .commit-msg{ font-family:'Space Grotesk', sans-serif; font-size:17px; color:var(--cream); font-weight:600; }
+  .commit-meta{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--slate-dim); margin:5px 0 10px; }
+  .commit-body{ color:var(--slate); font-size:14.5px; }
+  .commit-body li{ list-style:none; margin-bottom:5px; padding-left:16px; position:relative; }
+  .commit-body li::before{ content:'+'; position:absolute; left:0; color:var(--teal); }
+
+  /* ---------- projects ---------- */
+  .proj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .proj-card{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:10px;
+    padding:24px; transition: border-color 0.2s, transform 0.2s;
+  }
+  .proj-card:hover{ border-color: var(--amber); transform: translateY(-3px); }
+  .proj-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+  .proj-name{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px; color:var(--cream); }
+  .proj-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--slate-dim); white-space:nowrap; }
+  .proj-desc{ color:var(--slate); font-size:14px; margin-bottom:14px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal);
+    border:1px solid rgba(75,179,163,0.35); padding:3px 9px; border-radius:20px;
+  }
+
+  /* ---------- education / certs ---------- */
+  .edu-row{ display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-top:1px solid var(--line); flex-wrap:wrap; gap:6px; }
+  .edu-row:first-of-type{ border-top:none; }
+  .edu-name{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; color:var(--cream); }
+  .edu-sub{ color:var(--slate); font-size:13.5px; }
+  .edu-date{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate-dim); }
+
+  .cert-card{ background:var(--ink-2); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin-top:16px; }
+  .cert-card .cname{ font-family:'Space Grotesk',sans-serif; font-weight:600; color:var(--amber); font-size:15px; }
+  .cert-card p{ color:var(--slate); font-size:13.5px; margin-top:6px; }
+
+  /* ---------- contact / footer ---------- */
+  footer{ padding:80px 0 50px; text-align:center; }
+  .contact-btns{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:30px; }
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:14px; padding:13px 26px;
+    border-radius:8px; border:1px solid var(--line); color:var(--cream);
+    transition: all 0.2s;
+  }
+  .btn.primary{ background:var(--amber); color:var(--ink); border-color:var(--amber); font-weight:600; }
+  .btn.primary:hover{ background:#f2b558; }
+  .btn:not(.primary):hover{ border-color:var(--teal); color:var(--teal); }
+  .foot-note{ margin-top:50px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate-dim); }
+
+  @media (max-width:720px){
+    .navlinks{ display:none; }
+    .about-grid, .proj-grid{ grid-template-columns:1fr; }
+    .commit{ grid-template-columns: 60px 1fr; }
+    section{ padding:60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">bilal<span>.dev</span></div>
+    <div class="navlinks">
+      <a href="#about"><span class="num">01</span>about</a>
+      <a href="#stack"><span class="num">02</span>stack</a>
+      <a href="#experience"><span class="num">03</span>experience</a>
+      <a href="#projects"><span class="num">04</span>projects</a>
+      <a href="#contact"><span class="num">05</span>contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">bilal@lahore: ~/portfolio</span>
+      </div>
+      <div class="term-body">
+        <div class="line l1"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+        <div class="line l2"><span class="out">Muhammad Bilal — Full-Stack Developer &amp; AI/ML Engineer</span></div>
+        <div class="line l3"><span class="prompt">$</span> <span class="cmd">cat status.txt</span></div>
+        <div class="line l4"><span class="out">CS student, Minhaj University Lahore (8th semester) — open to backend / full-stack roles</span></div>
+        <div class="line l5"><span class="prompt">$</span> <span class="cmd">echo $LOCATION</span></div>
+        <div class="line l6"><span class="out">Lahore, Pakistan<span class="cursor"></span></span></div>
+      </div>
+    </div>
+    <p class="hero-tag">Building with the <b>MERN stack</b>, shipping <b>deep learning</b> models into production,
+      and deploying it all to the cloud. <b>6+ hands-on project cycles</b> across web platforms and computer vision.</p>
+    <div class="hero-meta">
+      <a href="mailto:bilalfarooqi410l@gmail.com">bilalfarooqi410l@gmail.com</a>
+      <span class="sep">/</span>
+      <a href="https://linkedin.com/in/bilay007" target="_blank">linkedin.com/in/bilay007</a>
+      <span class="sep">/</span>
+      <a href="https://www.freelancer.pk/u/bilay007" target="_blank">freelancer.pk/u/bilay007</a>
+      <span class="sep">/</span>
+      <span>$20/hr</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">01 / about</div>
+    <div class="about-grid">
+      <div>
+        <p><b>Computer Science student</b> at Minhaj University Lahore, in the final stretch of a BS focused on
+          full-stack engineering and applied AI. Comfortable owning a feature from database schema to deployed UI.</p>
+        <p>Recent work spans <b>React/Node platforms</b> for real clients, a <b>MERN travel app</b> with a bilingual
+          AI chatbot, and computer-vision systems for posture detection and crop monitoring — trained, tuned, and
+          pushed toward production-grade accuracy.</p>
+        <p>Comes from a background of running real operations — floor management, budgeting, client-facing
+          coordination — which shows up as clear requirements-gathering and steady communication on technical teams.</p>
+      </div>
+      <div>
+        <div class="stat-card"><div class="num">6+</div><div class="lbl">PROJECTS SHIPPED OR LIVE</div></div>
+        <div class="stat-card"><div class="num">95%</div><div class="lbl">ACCURACY — AI WORKOUT TRAINER</div></div>
+        <div class="stat-card"><div class="num">2026</div><div class="lbl">EXPECTED GRADUATION</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="eyebrow">02 / stack</div>
+    <h2 class="display">What I build with</h2>
+    <div class="import-block">
+<div><span class="kw">import</span> <span class="brace">{</span> C, C++, Python, JavaScript, SQL, ARM <span class="brace">}</span> <span class="kw">from</span> <span class="str">'languages'</span>;</div>
+<div><span class="kw">import</span> <span class="brace">{</span> React, Node<span class="mod">.js</span>, Express, TensorFlow, Keras, OpenCV, NumPy, Scikit-Learn <span class="brace">}</span> <span class="kw">from</span> <span class="str">'frameworks'</span>;</div>
+<div><span class="kw">import</span> <span class="brace">{</span> Git, GitHub, Docker, Linux, MS Office <span class="brace">}</span> <span class="kw">from</span> <span class="str">'tooling'</span>;</div>
+<div><span class="kw">import</span> <span class="brace">{</span> MongoDB, SQL <span class="brace">}</span> <span class="kw">from</span> <span class="str">'databases'</span>;</div>
+<div><span class="comment">// specializations: Deep Learning · Computer Vision · Full-Stack Development</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">03 / experience</div>
+    <h2 class="display">git log --experience</h2>
+
+    <div class="commit">
+      <div class="commit-hash">#a91f3c</div>
+      <div>
+        <div class="commit-msg">Full-Stack Developer Intern — LeadsPk Technologies</div>
+        <div class="commit-meta">2026 · Lahore, Pakistan</div>
+        <ul class="commit-body">
+          <li>Collaborated via Git/GitHub with structured code reviews</li>
+          <li>Optimized frontend, cutting page load times</li>
+          <li>Hardened environment-level security with .env configuration</li>
+          <li>Tested and debugged modules pre-release</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">#7d2e91</div>
+      <div>
+        <div class="commit-msg">Manager, Operations &amp; Innovation — BinAziz Tourism</div>
+        <div class="commit-meta">Nov 2024 – Present</div>
+        <ul class="commit-body">
+          <li>Owns financial planning and budgeting</li>
+          <li>Leads operational and marketing strategy</li>
+          <li>Builds out digital presence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">#4b6a08</div>
+      <div>
+        <div class="commit-msg">Floor Manager — Lenzhou Lamian</div>
+        <div class="commit-meta">Sep 2023 – Nov 2024</div>
+        <ul class="commit-body">
+          <li>Supervised daily operations and peak-hour service teams</li>
+          <li>Owned guest satisfaction outcomes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">04 / projects</div>
+    <h2 class="display">Things I've built</h2>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-head"><div class="proj-name">LeadsPK — Agency Portfolio</div><div class="proj-date">2026</div></div>
+        <div class="proj-desc">Responsive React SPA with a glassmorphism UI, 60fps hardware-accelerated animations, EmailJS contact forms, and WhatsApp integration.</div>
+        <div class="tag-row"><span class="tag">React</span><span class="tag">EmailJS</span><span class="tag">Live</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-head"><div class="proj-name">Musafroon — Travel Platform</div><div class="proj-date">2026</div></div>
+        <div class="proj-desc">MERN-stack travel &amp; tourism app with a bilingual (Roman Urdu / English) AI chatbot, JWT auth, and real-time currency APIs.</div>
+        <div class="tag-row"><span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">JWT</span><span class="tag">Live</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-head"><div class="proj-name">AI Workout Trainer</div><div class="proj-date">Jan 2025</div></div>
+        <div class="proj-desc">Posture detection with OpenPose, migrated VGG-19 → MobileNet for a 5→12 FPS speedup, lifting accuracy from 70% to 95%.</div>
+        <div class="tag-row"><span class="tag">OpenPose</span><span class="tag">MobileNet</span><span class="tag">F1 0.662</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-head"><div class="proj-name">Crop Detection System</div><div class="proj-date">Jan 2024</div></div>
+        <div class="proj-desc">EfficientNetV2L CNN with attention mechanisms and GLCM feature extraction for real-time crop health monitoring.</div>
+        <div class="tag-row"><span class="tag">CNN</span><span class="tag">Computer Vision</span></div>
+      </div>
+
+      <div class="proj-card" style="grid-column: span 2;">
+        <div class="proj-head"><div class="proj-name">Hotel Management System</div><div class="proj-date">Jan 2023</div></div>
+        <div class="proj-desc">Console-based C++ application handling room booking and billing, built around inheritance and polymorphism with file-based storage.</div>
+        <div class="tag-row"><span class="tag">C++</span><span class="tag">OOP</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">05 / education</div>
+    <h2 class="display">Background</h2>
+    <div class="edu-row">
+      <div><div class="edu-name">BS Computer Science — Minhaj University Lahore</div><div class="edu-sub">Lahore, Pakistan</div></div>
+      <div class="edu-date">Sep 2022 – Jun 2026</div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-name">FSc Pre-Engineering — KIPS College</div><div class="edu-sub">Matriculation — Private</div></div>
+      <div class="edu-date">—</div>
+    </div>
+    <div class="cert-card">
+      <div class="cname">NAVTTC Full-Stack Web Development</div>
+      <p>3-month MERN stack certification with project-based learning · 2026</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">06 / contact</div>
+    <h2 class="display">Let's build something</h2>
+    <p style="color:var(--slate); max-width:480px; margin:0 auto;">Open to backend and full-stack roles, freelance work, and collaborations involving AI/ML integration.</p>
+    <div class="contact-btns">
+      <a class="btn primary" href="mailto:bilalfarooqi410l@gmail.com">Email me</a>
+      <a class="btn" href="https://linkedin.com/in/bilay007" target="_blank">LinkedIn</a>
+      <a class="btn" href="https://www.freelancer.pk/u/bilay007" target="_blank">Freelancer profile</a>
+    </div>
+    <div class="foot-note">Muhammad Bilal · Lahore, Pakistan · exit 0</div>
+  </div>
+</footer>
+
+</body>
+</html>
