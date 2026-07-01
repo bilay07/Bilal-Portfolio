@@ -178,6 +178,13 @@
     font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal);
     border:1px solid rgba(75,179,163,0.35); padding:3px 9px; border-radius:20px;
   }
+  .tag.live{
+    color:var(--ink); background:var(--amber); border-color:var(--amber);
+    font-weight:600; display:inline-flex; align-items:center; gap:4px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .tag.live:hover{ background:#f2b558; transform:translateY(-1px); }
+  .tag.live::before{ content:'●'; font-size:8px; color:#1e7a4f; }
 
   /* ---------- education / certs ---------- */
   .edu-row{ display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-top:1px solid var(--line); flex-wrap:wrap; gap:6px; }
@@ -347,13 +354,13 @@
       <div class="proj-card">
         <div class="proj-head"><div class="proj-name">LeadsPK — Agency Portfolio</div><div class="proj-date">2026</div></div>
         <div class="proj-desc">Responsive React SPA with a glassmorphism UI, 60fps hardware-accelerated animations, EmailJS contact forms, and WhatsApp integration.</div>
-        <div class="tag-row"><span class="tag">React</span><span class="tag">EmailJS</span><span class="tag">Live</span></div>
+        <div class="tag-row"><span class="tag">React</span><span class="tag">EmailJS</span><a class="tag live" href="https://leadspktechnologies.com/" target="_blank" rel="noopener">Live</a></div>
       </div>
 
       <div class="proj-card">
         <div class="proj-head"><div class="proj-name">Musafroon — Travel Platform</div><div class="proj-date">2026</div></div>
         <div class="proj-desc">MERN-stack travel &amp; tourism app with a bilingual (Roman Urdu / English) AI chatbot, JWT auth, and real-time currency APIs.</div>
-        <div class="tag-row"><span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">JWT</span><span class="tag">Live</span></div>
+        <div class="tag-row"><span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">JWT</span><a class="tag live" href="https://www.mosafiroon.com/" target="_blank" rel="noopener">Live</a></div>
       </div>
 
       <div class="proj-card">
